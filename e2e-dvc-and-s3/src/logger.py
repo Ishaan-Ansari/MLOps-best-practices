@@ -40,6 +40,11 @@ def setup_logger(app_name: str, log_dir: str = 'logs'):
 
 # logger for tasks
 loggerDI = setup_logger("data_ingestion")
+loggerPR = setup_logger("data_preprocessing")
+loggerFE = setup_logger("feature_engineering")
+loggerMT = setup_logger("model_training")
+loggerME = setup_logger("model_evaluation")
+
 
 # logger for utilities
 loggerUtils = setup_logger("utilities")
