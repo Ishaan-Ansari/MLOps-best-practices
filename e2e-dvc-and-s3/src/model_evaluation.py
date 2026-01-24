@@ -5,6 +5,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from logger import loggerME as logger
 from dvclive import Live
 import yaml
+import json
 
 def load_params(params_path: str)-> dict:
     """Load model parameters from a pickle file."""
@@ -66,9 +67,9 @@ def evaluate_model(model, X_test: pd.DataFrame, y_test: pd.Series)-> dict:
 def save_metrics(metrics: dict, output_path: str)-> None:
     """Save evaluation metrics to a text file."""
     try:
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
         with open(output_path, 'w') as file:
-            for key, value in metrics.items():
-                file.write(f"{key}: {value}\n")
+            json.dump(metrics, file, indent=4)
         logger.info(f"Metrics saved successfully to {output_path}")
     except Exception as e:
         logger.error(f"Error saving metrics: {e}")
