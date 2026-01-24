@@ -4,12 +4,13 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from logger import loggerME as logger
 from dvclive import Live
+import yaml
 
 def load_params(params_path: str)-> dict:
     """Load model parameters from a pickle file."""
     try:
         with open(params_path, 'rb') as file:
-            params = pickle.load(file)
+            params = yaml.safe_load(file)
         logger.info(f"Model parameters loaded successfully from {params_path}")
         return params
     except FileNotFoundError:
@@ -77,7 +78,7 @@ def main():
     try:
         params = load_params(params_path='params.yaml')
         model = load_model('./models/model.pkl')
-        test_data = load_data('./data/processed/test.csv')
+        test_data = load_data('./data/processed/test_fe.csv')
 
         X_test = test_data.iloc[:, :-1].values
         y_test = test_data.iloc[:, -1].values
@@ -89,7 +90,7 @@ def main():
             live.log_metric("precision", metrics['precision']) 
             live.log_metric("recall", metrics['recall'])
 
-            live.log_params(metrics, 'reports/metrics.json')
+            live.log_params(params)
 
         save_metrics(metrics, output_path='./reports/metrics.json')
     except Exception as e:
