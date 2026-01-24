@@ -73,7 +73,7 @@ def main():
         final_df = preprocess_data(df)
         train_df, test_df = train_test_split(final_df, test_size=test_size, random_state=42)
 
-        save_data(train_data=train_df, test_data=test_df, data_path='data/')
+        save_data(train_data=train_df, test_data=test_df, data_path='./data')
         logger.info("Data ingestion completed successfully.")
     except Exception as e:
         logger.error(f"Data ingestion failed: {e}")

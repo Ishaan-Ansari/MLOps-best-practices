@@ -6,11 +6,11 @@ stages:
     params:
     - data_ingestion.test_size
     outs:
-    - data/raw
+    - data/raw_data
   preprocessing:
     cmd: python src/preprocessing.py
     deps:
-    - data/raw
+    - data/raw_data
     - src/preprocessing.py
     outs:
     - data/interim

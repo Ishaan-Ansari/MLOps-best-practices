@@ -7,7 +7,7 @@ import string
 import nltk
 
 nltk.download('stopwords')
-nktk.download('punkt')
+nltk.download('punkt')
 
 
 def transform_text(text: str) -> str:
@@ -55,8 +55,8 @@ def preprocess_df(df: pd.DataFrame, text_column: str, target_column='target'):
 def main(text_column: str = 'text', target_column: str = 'target'):
     """Main function to load, preprocess and save the DataFrame."""
     try:
-        train_data = pd.read_csv("./data/train.csv")
-        test_data = pd.read_csv("./data/test.csv")
+        train_data = pd.read_csv("./data/raw_data/train.csv")
+        test_data = pd.read_csv("./data/raw_data/test.csv")
 
         # Transform the data
         train_processed_data = preprocess_df(train_data, text_column, target_column)
