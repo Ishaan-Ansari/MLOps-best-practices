@@ -40,21 +40,24 @@ def apply_tfidf_vectorization(train_df: pd.DataFrame, test_df: pd.DataFrame, max
     """Apply TF-IDF to the data"""
     try:
         vectorizer = TfidfVectorizer(max_features=max_features)
+
+        train_df['text'] = train_df['text'].fillna('')  
+        test_df['text'] = test_df['text'].fillna('')
         
         X_train = train_df['text'].values
         y_train = train_df['target'].values
         X_test = test_df['text'].values
         y_test = test_df['target'].values
 
-        X_train_tfidf = vectorizer.fit_transform(X_train).toarray()
-        X_test_tfidf = vectorizer.transform(X_test).toarray()
+        X_train_tfidf = vectorizer.fit_transform(X_train)
+        X_test_tfidf = vectorizer.transform(X_test)
 
         logger.info("TF-IDF vectorization applied successfully.")
 
-        train_df = pd.DataFrame(X_train_tfidf, columns=vectorizer.get_feature_names_out())
+        train_df = pd.DataFrame(X_train_tfidf.toarray())
         train_df['target'] = y_train
 
-        test_df = pd.DataFrame(X_test_tfidf, columns=vectorizer.get_feature_names_out())
+        test_df = pd.DataFrame(X_test_tfidf.toarray())
         test_df['target'] = y_test
 
         logger.info(f"Train DataFrame shape after TF-IDF: {train_df.shape}")
