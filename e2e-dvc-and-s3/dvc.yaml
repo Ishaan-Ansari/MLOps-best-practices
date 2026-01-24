@@ -24,7 +24,7 @@ stages:
     outs:
     - data/processed
   model_building:
-    cmd: python src/model_building.py
+    cmd: python src/model_training.py
     deps:
     - data/processed
     - src/model_building.py
