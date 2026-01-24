@@ -71,16 +71,18 @@ def save_model(model: RandomForestClassifier, model_path: str)-> None:
 def main():
     try:
         # Load parameters from YAML file
-        params = load_params('params.yaml')['model_training']
-        train_data = load_data('./data/processed/train.csv')
+        params = load_params('params.yaml')['model_building']
+        train_data = load_data('./data/processed/train_fe.csv')
         X_train = train_data.iloc[:, :-1].values
         y_train = train_data.iloc[:, -1].values
 
         # Train the model
         model = train_model(X_train, y_train, params)
 
+        model_save_path = 'models/model.pkl'
+
         # Save the trained model
-        save_model(model, params['model_path'])
+        save_model(model, model_save_path)
     except Exception as e:
         logger.error(f"Error in main execution: {e}")
         raise
