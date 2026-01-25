@@ -44,7 +44,3 @@ loggerPR = setup_logger("data_preprocessing")
 loggerFE = setup_logger("feature_engineering")
 loggerMT = setup_logger("model_training")
 loggerME = setup_logger("model_evaluation")
-
-
-# logger for utilities
-loggerUtils = setup_logger("utilities")
