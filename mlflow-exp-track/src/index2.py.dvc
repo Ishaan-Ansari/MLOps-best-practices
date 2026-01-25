@@ -1,0 +1,5 @@
+outs:
+- md5: a15c8eefaf7c9092a60802ae9f10694e
+  size: 1935
+  hash: md5
+  path: index2.py
