@@ -27,4 +27,4 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest _tests.py
+          pytest continous_integration/_tests.py
